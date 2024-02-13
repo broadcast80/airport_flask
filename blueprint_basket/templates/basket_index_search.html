@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<table>
+    <tr>
+        <th>Откуда</th>
+        <th>Куда</th>
+        <th>Время вылета</th>
+        <th>Дата вылета</th>
+        <th>Действие</th>
+    </tr>
+    {% if flights %}
+    {% for flight in flights %}
+    <tr>
+        <td>{{flight['airport_in']}}</td>
+        <td>{{flight['airport_out']}}</td>
+        <td>{{flight['time_in']}}</td>
+        <td>{{flight['date_out']}}</td>
+        <td>
+            <a href="{{ url_for('bp_market.market_index', schedule_id=flight['id'], user_id=session['id_pass']) }}"
+               class="text-decoration-none text-primary">
+                <div>
+                    Перейти
+                </div>
+            </a>
+            <form action="{{ url_for('bp_market.market_index', schedule_id=flight['id'], user_id=session['id_pass']) }}"
+                  method="post">
+                <input type="hidden" name="prod_id" value="Перейти"
+                       class="button btn btn-outline-dark me-4">
+                <input type="submit" class="btn btn-outline-dark" value="Перейти">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+
+{% endblock %}

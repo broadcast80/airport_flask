@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+        <h2>Выберите место</h2>
+    </div>
+    <div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+        <table>
+            <tr>
+                <th>Направление</th>
+                <th>Время вылета</th>
+                <th>Дата вылета</th>
+                <th>Цена билета</th>
+                <th>Действие</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>
+                    <form action="{{ url_for('bp_market.market_index') }}" method="post">
+                        <input type="hidden" name="prod_id" value="{{ item[0] }}"
+                               class="button btn btn-outline-dark me-4">
+                        <input type="submit" class="btn btn-outline-dark" value="Добавить в корзину">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% if basket_items: %}
+<div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+    <h2>Корзина</h2>
+</div>
+<div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+    <ul>
+        {% for key, value in basket_items.items() %}
+        <li>{{ value.name }} (Количество: {{ value.cnt }}, Цена: {{ value.price }})</li>
+        {% endfor %}
+    </ul>
+
+
+</div>
+<div class="d-flex justify-content-between alin-items-center border border-black rounded-bottom p-4">
+    <a href="{{ url_for('bp_market.clear_basket') }}" class="text-black text-decoration-none">Очистить корзину</a>
+    <form action="{{ url_for('bp_market.checkout') }}" method="post">
+        <input type="submit" value="Оформить заказ">
+    </form>
+</div>
+{% endif %}
+<br>
+<div align="center" style="margin-top: 5px;">
+    <a href="{{ url_for('main_menu') }}" class="text-black text-decoration-none">Назад</a>
+</div>
+
+{% endblock %}

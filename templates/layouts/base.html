@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    {% block head %}
+    {% endblock %}
+
+    {% block title %}
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Empty page</title>
+    {% endif %}
+
+    {% endblock %}
+</head>
+<body class="">
+
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4 border-bottom">
+        <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0">
+            <a href="/" class="link-body-emphasis text-decoration-none">
+                <img src="{{ url_for('static', filename='images/globe.png') }}" alt="" width="60" class="">
+                <span class="fs-3 ms-5">Аэропорт</span>
+            </a>
+        </div>
+
+        {% if session['user_id'] %}
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-3">{{session['user_id']}}</button>
+            <a href="{{ url_for('ex') }}">
+                <button type="button" class="btn btn-outline-primary me-2"> {{msdf}}
+                    Logout
+                </button>
+            </a>
+        </div>
+
+        {% else %}
+        <div class="col-md-3 text-end">
+            <a href="{{ url_for('bp_query.auto') }}">
+                <button type="button" class="btn btn-outline-primary me-2">
+                    Login
+                </button>
+            </a>
+            <button type="button" class="btn btn-primary">Sign-up</button>
+        </div>
+        {% endif %}
+    </header>
+</div>
+
+{% block content %}
+
+{% endblock %}
+
+<div class="d-flex justify-content-center align-items-center">
+    <img src="{{ url_for('static', filename='images/plan.png') }}" class="img-fluid">
+</div>
+
+</body>
+</html>

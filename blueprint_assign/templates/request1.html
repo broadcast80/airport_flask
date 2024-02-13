@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center bg-white text-dark">
+    <h1>Введите параметры поиска</h1>
+</div>
+
+<div class="d-flex justify-content-center align-items-center p-4">
+    <form action="" method="POST" class="">
+        <div class="p-2 d-flex justify-content-between align-items-center">
+            <label for="start" class="col-4">Специальность врача</label>
+            <input class="col-7" type="text" name="spec" id="spec" placeholder="Хирургия, терапия...">
+        </div>
+        <div class="p-2 mt-4 d-flex justify-content-between">
+            <input type="submit" class="btn btn-outline-dark" value="Отправить">
+            <input type="reset" class="button btn btn-outline-dark me-4" value="Очистить">
+        </div>
+    </form>
+</div>
+
+<div class="d-flex justify-content-center align-items-center p-4">
+    <a href="{{ url_for('main_menu') }}">Вернуться в главное меню</a>
+</div>
+
+{% if doctors %}
+<div class="d-flex justify-content-center bg-white text-dark p-4">
+    <span class="fs-4">Доктора работающие по специальности: </span>
+    <span class="fs-4 fw-bold"> {{spec}}</span>
+</div>
+
+{% for doctor in doctors %}
+<div class="d-flex">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="m-4 p-4 border rounded-4 d-flex">
+            <div class="col-6">
+                <div class="">
+                    <div class="fw-bold">Id Доктора:</div>
+                    <div class="">{{doctor['id']}}</div>
+                </div>
+                <hr>
+                <div class="">
+                    <div class="fw-bold">Имя и Фамилия:</div>
+                    <div class="">
+                        {{doctor['name']}}
+                        {{doctor['surname']}}
+                    </div>
+                </div>
+                <hr>
+                <div class="">
+                    <div class="fw-bold">Дата найма на работу:</div>
+                    <div class="">{{doctor['date_hiring']}}</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{{ url_for('static', filename='images/doctor.png') }}" class="mb-3" width="200">
+                </div>
+                <a href="{{ url_for('bp_assign.assign2', doctor_id=doctor['id'], patient_id=session['uss_id']) }}" class="text-decoration-none text-primary">
+                    <div>
+                        Записаться на прием к врачу
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+{% endfor %}
+
+{% else %}
+<div class="d-flex">
+    <div class="col-3"></div>
+    <div class="col-6 border p-4">
+        <div class="d-flex justify-content-center">{{msg}}</div>
+
+    </div>
+    <div class="col-3"></div>
+</div>
+
+{% endif %}
+
+
+{% endblock %}

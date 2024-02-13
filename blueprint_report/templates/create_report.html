@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+        <h2>Введите даты для создания отчётности</h2>
+    </div>
+    <div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+        <form action="" method="POST" class="">
+            <div class="p-2 d-flex justify-content-between align-items-center">
+                <label for="date1" class="col-4">С даты</label>
+                <select name="date1" id="date1" autocomplete="off" required class="form-select">
+                    {% if date1 %}
+                    {% for date in date1 %}
+                    <option name="daste">{{date['date_out']}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label for="date2" class="col-4">По дату</label>
+                <select name="date2" id="date2" autocomplete="off" required class="form-select">
+                    {% if date2 %}
+                    {% for date in date2 %}
+                    <option name="daste">{{date['date_in']}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div class="p-2 mt-4 d-flex justify-content-between">
+                <input type="submit" class="btn btn-outline-dark" value="Отправить">
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% if msg %}
+<div class="container pt-4">
+    <h2>
+        {{msg}}
+    </h2>
+</div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+        <h2>Выберите место</h2>
+    </div>
+    <div class="d-flex">
+        <div class="justify-content-center align-items-center border border-black rounded-bottom p-4">
+            {% for i in range(1, 21) %}
+            <div>
+                {% set found_seat = false %}
+                {% for seat in seats %}
+                    {% if seat['number'] == i %}
+                    <div class="bg-primary">
+                        {% set found_seat = true %}
+                        number - <span class="fw-bold">{{ seat['number'] }}</span>
+                        price - {{ seat['price'] }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                {% if not found_seat %}
+                <div class="bg-secondary">
+                    number - {{ i }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="justify-content-center align-items-center border border-black rounded-bottom p-4">
+            {% for i in range(21, 41) %}
+            <div>
+                {% set found_seat = false %}
+                {% for seat in seats %}
+                    {% if seat['number'] == i %}
+                    <div class="bg-primary">
+                        {% set found_seat = true %}
+                        number - <span class="fw-bold">{{ seat['number'] }}</span>
+                        price - {{ seat['price'] }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                {% if not found_seat %}
+                <div class="bg-secondary">
+                    number - {{ i }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if basket_items: %}
+<div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+    <h2>Корзина</h2>
+</div>
+<div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+    <ul>
+        {% for key, value in basket_items.items() %}
+        <li> <span class="fw-bold">{{ value.flight }}</span> Место - {{ value.name }} (Цена: {{ value.price }})</li>
+        {% endfor %}
+    </ul>
+
+
+</div>
+<div class="d-flex justify-content-between alin-items-center border border-black rounded-bottom p-4">
+    <a href="{{ url_for('bp_market.clear_basket') }}" class="text-black text-decoration-none">Очистить корзину</a>
+    <form action="{{ url_for('bp_market.checkout') }}" method="post">
+        <input type="submit" value="Оформить заказ">
+    </form>
+</div>
+{% endif %}
+<br>
+<div align="center" style="margin-top: 5px;">
+    <a href="{{ url_for('bp_market.index') }}" class="text-black text-decoration-none">Назад</a>
+</div>
+
+{% endblock %}

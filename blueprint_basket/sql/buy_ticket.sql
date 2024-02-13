@@ -1,0 +1,1 @@
+call buy_ticket("$id_pass", "$pass_pass", "$id_schedule", "$seat", "$fio");

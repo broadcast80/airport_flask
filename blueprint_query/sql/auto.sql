@@ -1,0 +1,1 @@
+select * from s_users where password = '$password' and login = '$login'

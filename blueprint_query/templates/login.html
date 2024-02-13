@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* чтобы видео занимало всю область экрана */
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1; /* чтобы видео было позади контента */
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        h1 {
+            color: navy;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+    <title>Авторизация</title>
+</head>
+<body>
+
+<video autoplay muted loop>
+    <source src="{{ url_for('static', filename='vid/ris_w.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<div class="login-container p-4">
+    <form method="post">
+        <img class="mb-4" src="{{ url_for('static', filename='images/globe.png') }}" alt="" width="70" height="70">
+        <h1 class="h3 mb-3 fw-bold">Войдите в профиль</h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" name="login" placeholder="name@example.com">
+            <label>Логин</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" name="password" placeholder="password">
+            <label>Пароль</label>
+        </div>
+        <hr>
+        <button class="mt-3 btn btn-primary w-100 py-2" type="submit">Войти</button>
+        <p class="mt-3 mb-0 text-body-secondary">© 2017–2024</p>
+    </form>
+</div>
+
+</body>
+</html>

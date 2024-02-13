@@ -1,0 +1,4 @@
+{
+  "foreign": ["bp_assign"],
+  "admin": ["bp_query", "bp_report", "bp_report"]
+}

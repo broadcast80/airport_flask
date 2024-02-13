@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center ">
+    <div class="col-5"></div>
+    <div class="justify-content-center align-items-center col-3 shadow p-3 rounded">
+        <div class="mb-1 mt-1">
+            <h3>Вход в ИС</h3>
+            <span class="">Введите дату, свой айди и айди врача</span>
+        </div>
+        <div class="p-2">
+            <hr>
+        </div>
+        <form action="" method="post">
+            <div class="mb-3">
+                <input class="form-control" aria-describedby="emailHelp" name="date"
+                       placeholder="Дата записи">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="pat_id"
+                       placeholder="Ваш айди">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="doc_id"
+                       placeholder="Айди врача">
+            </div>
+            <div class="p-1">
+                <hr>
+            </div>
+            <div class="p-1 mb-3 border-bottom d-flex justify-content-center bg-black rounded-5">
+                <button type="submit" class="btn text-white">
+                    отправить
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="col-5"></div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="text-danger d-flex justify-content-center">
+    {{msg}}
+</div>
+
+{% if session['user_group'] == 'admin' %}
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-4 border-bottom">Главное меню ИС</h2>
+    <div class="d-flex justify-content-evenly row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex align-items-start">
+            <div class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <img src="{{ url_for('static', filename='images/magnifier.png') }}" alt="" width="50px">
+            </div>
+            <div>
+                <h3 class="fs-2 text-body-emphasis pb-3">Работа с запросами</h3>
+                <p class="pb-3">Раздел работы с запросами. Здесь вы можете сделать запросы в базу данных для поиска нужной информации.</p>
+                <a href="{{ url_for('request_menu') }}" class="btn btn-primary">
+                    Перейти в раздел
+                </a>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <div class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <img src="{{ url_for('static', filename='images/paper-clip.png') }}" alt="" width="50px">
+            </div>
+            <div>
+                <h3 class="fs-2 text-body-emphasis pb-3">Работа с отчетами</h3>
+                <p class="pb-3">Раздел работы с отчетами. Здесь вы можете создавать и просматривать отчеты за определенные даты.</p>
+                <a href="{{ url_for('insert') }}" class="btn btn-primary">
+                    Перейти в раздел
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-4 border-bottom">Главное меню ИС</h2>
+    <div class="d-flex justify-content-evenly row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex align-items-start">
+            <div class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <img src="{{ url_for('static', filename='images/ticket-flight.png') }}" alt="" width="50px">
+            </div>
+            <div>
+                <h3 class="fs-2 text-body-emphasis pb-3">Купить билет</h3>
+                <p class="pb-3">Покупка билетов на рейсы. Здесь вы можете приобрести билеты на ближайшие рейсы.</p>
+                <a href="{{ url_for('bp_market.index') }}" class="btn btn-primary">
+                    Перейти в раздел
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

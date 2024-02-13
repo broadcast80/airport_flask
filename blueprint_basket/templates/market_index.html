@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+        <h2>Онлайн Магазин</h2>
+    </div>
+    <div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+        <table>
+            <tr>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Время вылета</th>
+                <th>Дата вылета</th>
+                <th>Цена билета</th>
+                <th>Действие</th>
+            </tr>
+            {% if flights %}
+            {% for flight in flights %}
+            <tr>
+                <td>{{flight['airport_in']}}</td>
+                <td>{{flight['airport_out']}}</td>
+                <td>{{flight['time_in']}}</td>
+                <td>{{flight['date_out']}}</td>
+                <td>{{flight['price']}}</td>
+                <td>
+                    <a href="{{ url_for('bp_market.market_index', schedule_id=flight['id'], user_id=session['id_pass']) }}" class="text-decoration-none text-primary">
+                        <div>
+                            Перейти
+                        </div>
+                    </a>
+                    <form action="{{ url_for('bp_market.market_index', schedule_id=flight['id'], user_id=session['id_pass']) }}" method="post">
+                        <input type="hidden" name="prod_id" value="Перейти"
+                               class="button btn btn-outline-dark me-4">
+                        <input type="submit" class="btn btn-outline-dark" value="Перейти">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+</div>
+
+{% if basket_items: %}
+<div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+    <h2>Корзина</h2>
+</div>
+<div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+    <ul>
+        {% for key, value in basket_items.items() %}
+        <li> <span class="fw-bold">{{ value.flight }}</span> Место - {{ value.name }} Дата вылета - {{ value.date_out }} (Цена: {{ value.price }})</li>
+        {% endfor %}
+    </ul>
+
+
+</div>
+<div class="d-flex justify-content-between alin-items-center border border-black rounded-bottom p-4">
+    <a href="{{ url_for('bp_market.clear_basket') }}" class="text-black text-decoration-none">Очистить корзину</a>
+    <a href="{{ url_for('bp_market.checkout') }}" class="text-danger text-decoration-none">Оформить заказ</a>
+    <form action="{{ url_for('bp_market.checkout') }}" method="post">
+        <input type="submit" value="Оформить заказ">
+    </form>
+</div>
+{% endif %}
+<br>
+<div align="center" style="margin-top: 5px;">
+    <a href="{{ url_for('bp_market.index') }}" class="text-black text-decoration-none">Назад</a>
+</div>
+
+
+
+{% endblock %}

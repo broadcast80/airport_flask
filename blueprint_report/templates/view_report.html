@@ -1,0 +1,72 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+        <h2>Введите даты для просмотра отчётности</h2>
+    </div>
+    <div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+        {% if date1 and date2 %}
+        <form action="" method="POST" class="">
+            <div class="p-2 d-flex justify-content-between align-items-center">
+                <label for="date1" class="col-4">С даты</label>
+                <select name="date1" id="date1" autocomplete="off" required class="form-select">
+                    {% if date1 %}
+                    {% for date in date1 %}
+                    <option name="daste">{{date['flight_date']}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label for="date2" class="col-4">По дату</label>
+                <select name="date2" id="date2" autocomplete="off" required class="form-select">
+                    {% if date2 %}
+                    {% for date in date2 %}
+                    <option name="daste">{{date['flight_date']}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div class="p-2 mt-4 d-flex justify-content-between">
+                <input type="submit" class="btn btn-outline-dark" value="Отправить">
+            </div>
+        </form>
+        {% else %}
+        <h2 class="p-4">Пока ни одного отчета не было создано</h2>
+        {% endif %}
+    </div>
+
+</div>
+{% if reports %}
+<div class="container">
+    <div class="d-flex justify-content-center p-3 mt-2 border border-black rounded-top bg-dark text-white">
+        <h4>Отчеты от {{start}} до {{end}}</h4>
+    </div>
+    <div class="d-flex justify-content-center border border-black p-4" >
+        <table class="table table-white table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Откуда</th>
+                    <th scope="col">Куда</th>
+                    <th scope="col">Цена одного билета</th>
+                    <th scope="col">Количество проданных билетов</th>
+                    <th scope="col">Количество совершенных рейсов</th>
+                    <th scope="col">Суммарная выручка</th>
+                </tr>
+            </thead>
+            {% for report in reports %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{report['airport_in']}}</th>
+                    <td>{{report['airport_out']}}</td>
+                    <td>{{report['ticket_price']}}</td>
+                    <td>{{report['ticket_count']}}</td>
+                    <td>{{report['flight_count']}}</td>
+                    <td>{{report['money']}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

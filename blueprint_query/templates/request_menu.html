@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center bg-white text-dark pt-4">
+    <h1>Выберите тип запроса</h1>
+</div>
+
+<br>
+<div class="d-flex justify-content-evenly mb-4 p-4">
+    <div class="col-3 border rounded-5 p-4">
+        <div class="d-flex justify-content-center align-items-center pb-2">
+            <img src="{{ url_for('static', filename='images/planes.png') }}" class="mb-3" width="100">
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <span>Запрос о проданных билетах за последние дни</span>
+        </div>
+        <div class="pt-4">
+            <a href="{{ url_for('bp_query.request_1') }}" class="btn btn-primary">
+                Перейти в раздел
+            </a>
+        </div>
+    </div>
+    <div class="col-3 border rounded-5 p-4">
+        <div class="d-flex justify-content-center align-items-center pb-2">
+            <img src="{{ url_for('static', filename='images/planes.png') }}" class="mb-3" width="100">
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <span>Запрос о рейсах, название начинается с определенных букв</span>
+        </div>
+        <div class="pt-4">
+            <a href="{{ url_for('bp_query.request_2') }}" class="btn btn-primary">
+                Перейти в раздел
+            </a>
+        </div>
+    </div>
+    <div class="col-3 border rounded-5 p-4">
+        <div class="d-flex justify-content-center align-items-center pb-2">
+            <img src="{{ url_for('static', filename='images/planes.png') }}" class="mb-3" width="100">
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <span>Запрос о рейсах, отправляющихся в определенную дату</span>
+        </div>
+        <div class="pt-4">
+            <a href="{{ url_for('bp_query.request_3') }}" class="btn btn-primary">
+                Перейти в раздел
+            </a>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center">
+    <a href="{{ url_for('main_menu') }}" class="p-2 btn btn-primary">Вернуться в главное меню</a>
+</div>
+
+{% endblock %}

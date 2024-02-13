@@ -1,0 +1,1 @@
+INSERT INTO s_users (u_id, u_name, u_surname, u_password) VALUES ('$login', '$nm', '$sm', '$password');

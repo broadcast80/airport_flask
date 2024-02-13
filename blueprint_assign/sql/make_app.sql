@@ -1,0 +1,1 @@
+call make_appointment('$doctor_id', '$pat_id', '$app_date')

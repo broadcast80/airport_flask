@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center bg-white text-dark">
+    <h1>Введите параметры поиска</h1>
+</div>
+
+<div class="d-flex justify-content-center align-items-center p-4">
+    <form action="" method="POST" class="">
+        <div class="p-2 d-flex justify-content-between align-items-center">
+            <label for="start" class="col-4">Дата вылета</label>
+            <select name="date" autocomplete="off" required class="form-select">
+                {% if dates %}
+                {% for date in dates %}
+                <option name="daste">{{date['date_out']}}</option>
+                {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="p-2 mt-4 d-flex justify-content-between">
+            <input type="submit" class="btn btn-outline-dark" value="Отправить">
+        </div>
+    </form>
+</div>
+
+<div class="d-flex justify-content-center">
+    <a href="{{ url_for('request_menu') }}" class="p-2 btn btn-primary">Вернуться в меню запросов</a>
+</div>
+
+{% if flights %}
+{% for flight in flights %}
+<div class="d-flex">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="m-4 p-4 border rounded-4 d-flex">
+            <div class="col-6">
+                <div class="">
+                    <div class="fw-bold">Id рейса:</div>
+                    <div class="">{{flight['id_flight']}}</div>
+                </div>
+                <hr>
+                <div class="">
+                    <div class="fw-bold">Дата вылета и посадки</div>
+                    <div class="">
+                        {{flight['date_out']}}
+                        {{flight['date_in']}}
+                    </div>
+                </div>
+                <hr>
+                <div class="">
+                    <div class="fw-bold">Цена билета</div>
+                    <div class="">{{flight['price']}}</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{{ url_for('static', filename='images/planes.png') }}" class="mb-3" width="200">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+{% endfor %}
+
+{% else %}
+<div class="d-flex pt-4">
+    <div class="col-3"></div>
+    <div class="col-6 border p-4">
+        <div class="d-flex justify-content-center">Рейсов не найдено</div>
+
+    </div>
+    <div class="col-3"></div>
+</div>
+{% endif %}
+
+{% endblock %}

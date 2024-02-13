@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+<meta charset="UTF-8">
+<title>Заказ подтвержден</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+        <h2>Заказ оформлен!</h2>
+    </div>
+    <div class="justify-content-center alin-items-center border border-black rounded-bottom p-4">
+        <div class="border-bottom border-black">
+            <p>Спасибо за покупку. Ваш заказ был успешно обработан и скоро будет отправлен.</p>
+        </div>
+        <div class="pt-2">
+            <h2>Детали заказа:</h2>
+            <ul>
+                {% if order_details %}
+                {% for item in order_details %}
+                <li>{{ item.product_name }} - Цена: {{ item.price }} руб.</li>
+                {% endfor %}
+                {% else %}
+                <li>Информация о заказе недоступна.</li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+
+    <center class="p-4">
+        <a href="{{ url_for('bp_market.index') }}" class="text-black text-decoration-none">Вернуться назад</a>
+    </center>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center p-4 mt-2 border border-black rounded-top bg-dark text-white">
+        <h2>Введите ваши паспортные данные</h2>
+    </div>
+    <div class="d-flex justify-content-center alin-items-center border border-black rounded-bottom p-4">
+        <form action="" method="POST" class="">
+            <div class="p-2 d-flex justify-content-between align-items-center">
+                <label for="fio" class="col-4">ФИО</label>
+                <input class="col-7" type="text" name="fio" id="fio" placeholder="Иван Иванов Иванович">
+            </div>
+            <div class="p-2 d-flex justify-content-between align-items-center">
+                <label for="passport" class="col-4">Серия и номер паспорта</label>
+                <input class="col-7" type="text" name="passport" id="passport" placeholder="1617 245824">
+            </div>
+            <div class="p-2 mt-4 d-flex justify-content-between">
+                <input type="submit" class="btn btn-outline-dark" value="Отправить">
+                <input type="reset" class="button btn btn-outline-dark me-4" value="Очистить">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
